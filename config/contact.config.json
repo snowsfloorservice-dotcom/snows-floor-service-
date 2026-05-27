@@ -1,0 +1,24 @@
+{
+  "businessPhoneDisplay": "(601) 348-1512",
+  "businessPhoneTel": "+16013481512",
+  "phoneProvider": "current",
+  "clickToCallEnabled": true,
+  "smsEnabled": false,
+  "googleVoice": {
+    "enabled": false,
+    "businessPhoneDisplay": "",
+    "businessPhoneTel": "",
+    "smsEnabled": false,
+    "smsWebhookUrl": ""
+  },
+  "jobber": {
+    "requestWorkUrl": "[JOBBER_REQUEST_WORK_URL]",
+    "onlineBookingUrl": "[JOBBER_ONLINE_BOOKING_URL]"
+  },
+  "jobberAi": {
+    "enabled": false,
+    "mode": "placeholder",
+    "assistantName": "Jobber AI Assistant",
+    "widgetEmbedUrl": ""
+  }
+}

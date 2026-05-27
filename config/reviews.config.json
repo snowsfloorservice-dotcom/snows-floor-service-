@@ -1,0 +1,14 @@
+{
+  "minimumRating": 4,
+  "featuredReviewsOnly": false,
+  "requireManualApproval": false,
+  "hiddenReviewIds": [],
+  "approvedReviewIds": [],
+  "pinnedReviewIds": [
+    "featured-downtown-office",
+    "featured-medical-office"
+  ],
+  "maxReviews": 6,
+  "cacheSeconds": 300,
+  "verifiedBadgeLabel": "Verified customer"
+}

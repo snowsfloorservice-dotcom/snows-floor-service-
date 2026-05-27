@@ -1,0 +1,46 @@
+[
+  {
+    "id": "featured-downtown-office",
+    "customerName": "Property Manager",
+    "rating": 5,
+    "text": "Snows Floor Service brought our lobby floors back to a deep, professional shine. The work was clean, efficient, and exactly what our building needed before opening Monday morning.",
+    "businessOrLocation": "Downtown Office Building",
+    "serviceType": "Strip & Wax",
+    "verified": true,
+    "featured": true,
+    "createdAt": "2026-05-01T14:00:00.000Z"
+  },
+  {
+    "id": "featured-medical-office",
+    "customerName": "Facilities Director",
+    "rating": 5,
+    "text": "Reliable, polished, and easy to schedule. Their team maintained our high-traffic floors with the kind of detail we need in a professional medical environment.",
+    "businessOrLocation": "Medical Office",
+    "serviceType": "Floor Scrubbing & Maintenance",
+    "verified": true,
+    "featured": true,
+    "createdAt": "2026-04-18T14:00:00.000Z"
+  },
+  {
+    "id": "featured-school-campus",
+    "customerName": "School Administrator",
+    "rating": 5,
+    "text": "The floors looked brighter, safer, and easier to maintain after service. Communication was clear and the crew worked around our schedule without disrupting the building.",
+    "businessOrLocation": "School Campus",
+    "serviceType": "VCT Floor Maintenance",
+    "verified": true,
+    "featured": true,
+    "createdAt": "2026-03-22T14:00:00.000Z"
+  },
+  {
+    "id": "featured-retail-space",
+    "customerName": "Retail Owner",
+    "rating": 4,
+    "text": "Our showroom floor finally has the clean, reflective finish we wanted customers to notice. The service felt professional from walkthrough to final result.",
+    "businessOrLocation": "Retail Showroom",
+    "serviceType": "Buffing & Burnishing",
+    "verified": true,
+    "featured": true,
+    "createdAt": "2026-02-14T14:00:00.000Z"
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "name": "snows-floor-service-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node --check server.js && node --check src/contact/config.js && node --check src/contact/jobberAiService.js && node --check src/reviews/config.js && node --check src/reviews/curation.js && node --check src/reviews/reviewService.js && node --check src/reviews/providers/jobber.js && node --check src/reviews/providers/fallback.js && node --check assets/js/contact.js && node --check assets/js/gallery.js && node --check assets/js/reviews.js && node --check assets/js/careers-data.js && node --check assets/js/careers.js && node --check assets/js/job-detail.js"
+  }
+}

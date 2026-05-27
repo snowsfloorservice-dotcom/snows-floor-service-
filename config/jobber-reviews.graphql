@@ -1,0 +1,19 @@
+# Replace this sample query with the review/testimonial query available to your
+# Jobber account/app. The server passes the $first variable and normalizes common
+# review field names before public filtering.
+query WebsiteReviews($first: Int!) {
+  reviews(first: $first) {
+    nodes {
+      id
+      rating
+      text
+      customerName
+      businessName
+      locationName
+      serviceType
+      verified
+      featured
+      createdAt
+    }
+  }
+}
