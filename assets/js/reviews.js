@@ -1,43 +1,15 @@
 (function () {
-  const fallbackReviews = [
-    {
-      id: "featured-downtown-office",
-      customerName: "Property Manager",
-      rating: 5,
-      text: "Snows Floor Service brought our lobby floors back to a deep, professional shine. The work was clean, efficient, and exactly what our building needed before opening Monday morning.",
-      businessOrLocation: "Downtown Office Building",
-      serviceType: "Strip & Wax",
-      verified: true
-    },
-    {
-      id: "featured-medical-office",
-      customerName: "Facilities Director",
-      rating: 5,
-      text: "Reliable, polished, and easy to schedule. Their team maintained our high-traffic floors with the kind of detail we need in a professional medical environment.",
-      businessOrLocation: "Medical Office",
-      serviceType: "Floor Scrubbing & Maintenance",
-      verified: true
-    },
-    {
-      id: "featured-school-campus",
-      customerName: "School Administrator",
-      rating: 5,
-      text: "The floors looked brighter, safer, and easier to maintain after service. Communication was clear and the crew worked around our schedule without disrupting the building.",
-      businessOrLocation: "School Campus",
-      serviceType: "VCT Floor Maintenance",
-      verified: true
-    }
-  ];
-
+  const EMPTY_REVIEW_TEXT = "Customer reviews will appear here soon.";
   const clientConfig = {
     minimumRating: 4,
-    verifiedBadgeLabel: "Verified customer"
+    verifiedBadgeLabel: "Google review"
   };
 
   const track = document.getElementById("reviewsTrack");
   const status = document.getElementById("reviewsStatus");
   const previous = document.getElementById("reviewsPrev");
   const next = document.getElementById("reviewsNext");
+  const controls = document.querySelector(".review-controls");
 
   if (!track) return;
 
@@ -45,10 +17,6 @@
     if (!status) return;
     status.textContent = message;
     status.classList.toggle("review-status-error", Boolean(isError));
-  }
-
-  function curatedClientFallback(reviews) {
-    return reviews.filter((review) => Number(review.rating) >= clientConfig.minimumRating);
   }
 
   function starText(rating) {
@@ -88,8 +56,17 @@
 
   function renderReviews(reviews, config) {
     track.innerHTML = "";
+    if (controls) controls.hidden = false;
     const label = config && config.verifiedBadgeLabel;
     reviews.forEach((review) => track.appendChild(reviewCard(review, label)));
+  }
+
+  function renderEmptyState() {
+    track.innerHTML = "";
+    if (controls) controls.hidden = true;
+    const card = el("article", "review-card review-empty-card");
+    card.appendChild(el("p", "review-text", EMPTY_REVIEW_TEXT));
+    track.appendChild(card);
   }
 
   async function fetchJson(url) {
@@ -99,24 +76,23 @@
   }
 
   async function loadReviews() {
-    setStatus("Loading curated customer experiences...", false);
+    setStatus("Checking for Google reviews...", false);
 
     try {
       const payload = await fetchJson("/api/reviews?limit=6");
-      if (!payload.reviews || !payload.reviews.length) throw new Error("No curated reviews returned.");
-      renderReviews(payload.reviews, payload.config);
-      setStatus(payload.source === "jobber" ? "Showing curated Jobber customer experiences." : "Showing featured customer experiences.", false);
-      return;
-    } catch (error) {
-      try {
-        const reviews = curatedClientFallback(await fetchJson("data/featured-reviews.json"));
-        renderReviews(reviews, clientConfig);
-        setStatus("Showing featured customer experiences while live reviews are unavailable.", true);
-      } catch (fallbackError) {
-        renderReviews(curatedClientFallback(fallbackReviews), clientConfig);
-        setStatus("Showing featured customer experiences while live reviews are unavailable.", true);
+      const reviews = Array.isArray(payload.reviews) ? payload.reviews : [];
+
+      if (reviews.length) {
+        renderReviews(reviews, payload.config);
+        setStatus("Showing positive Google reviews.", false);
+        return;
       }
+    } catch (error) {
+      // No public fallback reviews are shown. Real Google reviews only.
     }
+
+    renderEmptyState();
+    setStatus("Google reviews will appear here when available.", false);
   }
 
   function scrollReviews(direction) {

@@ -131,7 +131,15 @@ const server = http.createServer(async (req, res) => {
     url.pathname = "/schedule.html";
   }
 
-  if (/^\/careers\/[a-z0-9-]+\/?$/i.test(url.pathname)) {
+  if (url.pathname === "/careers" || url.pathname === "/careers/") {
+    url.pathname = "/careers.html";
+  }
+
+  if (url.pathname === "/careers/jobs" || url.pathname === "/careers/jobs/") {
+    url.pathname = "/careers-jobs.html";
+  }
+
+  if (/^\/careers\/(?!jobs\/?$)[a-z0-9-]+\/?$/i.test(url.pathname)) {
     url.pathname = "/job.html";
   }
 

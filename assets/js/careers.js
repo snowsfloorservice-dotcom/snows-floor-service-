@@ -221,7 +221,7 @@
     const infoRow = document.createElement("div");
     infoRow.className = "job-info-row";
     infoRow.appendChild(createInfoItem("Location", displayLocation(job)));
-    infoRow.appendChild(createInfoItem("Company", "Snow's Floor Service"));
+    infoRow.appendChild(createInfoItem("Company", "Snows Floor Service"));
     infoRow.appendChild(createInfoItem("Employment", formatEmployment(job.employmentType)));
     if (job.payType) infoRow.appendChild(createInfoItem("Pay", job.payType));
     if (otherLocations) {
@@ -232,7 +232,9 @@
 
     const viewButton = document.createElement("a");
     viewButton.className = "view-job-button";
-    viewButton.href = `careers/${encodeURIComponent(job.slug)}`;
+    const encodedSlug = encodeURIComponent(job.slug);
+    const cleanJobsRoute = /^\/careers\/jobs\/?$/.test(window.location.pathname);
+    viewButton.href = cleanJobsRoute ? `/careers/${encodedSlug}` : `job.html?slug=${encodedSlug}`;
     viewButton.textContent = "View Job";
     viewButton.setAttribute("aria-label", `View ${job.title} job details`);
     card.appendChild(viewButton);

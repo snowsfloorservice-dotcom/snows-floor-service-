@@ -1,7 +1,6 @@
 const { loadReviewConfig, publicReviewConfig } = require("./config");
 const { applyReviewCuration } = require("./curation");
-const { fetchFallbackReviews } = require("./providers/fallback");
-const { fetchJobberReviews } = require("./providers/jobber");
+const { fetchGoogleReviews } = require("./providers/google");
 
 let cache = null;
 
@@ -22,31 +21,27 @@ async function getCuratedReviews(options = {}) {
   const errors = [];
 
   try {
-    const jobberResult = await fetchJobberReviews(config, cwd);
-    const curatedJobberReviews = applyReviewCuration(jobberResult.reviews, config);
+    const googleResult = await fetchGoogleReviews(config, cwd);
+    const curatedGoogleReviews = applyReviewCuration(googleResult.reviews.map((review) => ({ ...review, source: "google" })), config);
 
-    if (curatedJobberReviews.length) {
-      const payload = {
-        source: "jobber",
-        usingFallback: false,
-        reviews: curatedJobberReviews,
-        config: publicReviewConfig(config)
-      };
-      cache = { createdAt: Date.now(), payload };
-      return payload;
-    }
+    const payload = {
+      source: "google",
+      usingFallback: false,
+      reviews: curatedGoogleReviews,
+      config: publicReviewConfig(config),
+      errors: googleResult.skipped ? [googleResult.skipped] : []
+    };
 
-    if (jobberResult.skipped) errors.push(jobberResult.skipped);
+    cache = { createdAt: Date.now(), payload };
+    return payload;
   } catch (error) {
     errors.push(error.message);
   }
 
-  const fallbackReviews = await fetchFallbackReviews(cwd);
-  const curatedFallbackReviews = applyReviewCuration(fallbackReviews.map((review) => ({ ...review, source: "fallback" })), config);
   const payload = {
-    source: "fallback",
-    usingFallback: true,
-    reviews: curatedFallbackReviews,
+    source: "google",
+    usingFallback: false,
+    reviews: [],
     config: publicReviewConfig(config),
     errors
   };

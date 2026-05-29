@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 
 const TEXT_FIELDS = ["text", "reviewText", "body", "content", "comment", "message", "description"];
-const NAME_FIELDS = ["customerName", "clientName", "reviewerName", "authorName", "name"];
+const NAME_FIELDS = ["customerName", "clientName", "reviewerName", "authorName", "author_name", "displayName"];
 const RATING_FIELDS = ["rating", "starRating", "stars", "score"];
 
 function firstValue(source, fields) {
@@ -25,6 +25,22 @@ function cleanText(value, fallback = "") {
   return String(value ?? fallback).replace(/\s+/g, " ").trim();
 }
 
+function normalizeRating(value) {
+  if (typeof value === "number") return value;
+
+  const numeric = Number(value);
+  if (Number.isFinite(numeric)) return numeric;
+
+  const normalized = cleanText(value).toUpperCase().replace(/^STAR_RATING_/, "");
+  return {
+    ONE: 1,
+    TWO: 2,
+    THREE: 3,
+    FOUR: 4,
+    FIVE: 5
+  }[normalized] || NaN;
+}
+
 function stableId(review) {
   const seed = [
     review.id,
@@ -37,25 +53,31 @@ function stableId(review) {
 
 function normalizeReview(raw, source = "jobber") {
   const text = cleanText(firstValue(raw, TEXT_FIELDS));
-  const rating = Number(firstValue(raw, RATING_FIELDS));
+  const rating = normalizeRating(firstValue(raw, RATING_FIELDS));
   const customerName = cleanText(
-    firstValue(raw, NAME_FIELDS) || nestedValue(raw, ["client.name", "customer.name", "author.name"]),
+    firstValue(raw, NAME_FIELDS) || nestedValue(raw, [
+      "client.name",
+      "customer.name",
+      "author.name",
+      "authorAttribution.displayName",
+      "reviewer.displayName"
+    ]),
     "Customer"
   );
 
   const review = {
-    id: cleanText(raw.id || raw.uuid || raw.reviewId || ""),
+    id: cleanText(raw.id || raw.uuid || raw.reviewId || raw.name || ""),
     customerName,
     rating,
     text,
     businessOrLocation: cleanText(
-      raw.businessOrLocation || raw.businessName || raw.locationName || raw.location || nestedValue(raw, ["property.name"]),
+      raw.businessOrLocation || raw.businessName || raw.locationName || raw.location || raw.placeName || nestedValue(raw, ["property.name"]),
       ""
     ),
     serviceType: cleanText(raw.serviceType || raw.service || nestedValue(raw, ["job.jobType", "workRequest.serviceType"]), ""),
-    verified: Boolean(raw.verified || raw.verifiedCustomer || raw.isVerified),
+    verified: source === "google" || Boolean(raw.verified || raw.verifiedCustomer || raw.isVerified),
     featured: Boolean(raw.featured || raw.isFeatured),
-    createdAt: raw.createdAt || raw.updatedAt || raw.submittedAt || null,
+    createdAt: raw.createdAt || raw.updatedAt || raw.submittedAt || raw.publishTime || raw.createTime || (raw.time ? new Date(Number(raw.time) * 1000).toISOString() : null),
     source
   };
 

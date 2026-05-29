@@ -1,4 +1,4 @@
-// Toggle currentlyHiring to show or hide a role on careers.html and job detail routes.
+// Toggle currentlyHiring to show or hide a role on the careers jobs page and job detail routes.
 // Each job can be available in one or more hiring areas through its locations array.
 const SNOWS_CAREER_SERVICE_AREAS = [
   { city: "Hattiesburg", state: "MS", label: "Hattiesburg, MS", zipCodes: ["39401", "39402", "39406", "39407"], latitude: 31.3271, longitude: -89.2903 },
@@ -59,6 +59,13 @@ const CORE_FIELD_ZIP_CODES = careerZipCodesForLocations(CORE_FIELD_LOCATIONS);
 const JACKSON_ROUTE_CITIES = ["Florence", "Byram", "Pearl", "Brandon", "Clinton"];
 const JACKSON_ROUTE_LOCATIONS = careerLabelsForCities(JACKSON_ROUTE_CITIES);
 const JACKSON_ROUTE_ZIP_CODES = careerZipCodesForLocations(JACKSON_ROUTE_LOCATIONS);
+const MARKETING_INTERN_CITIES = ["Florence", "Byram", "Pearl", "Brandon", "Hattiesburg"];
+const MARKETING_INTERN_LOCATIONS = careerLabelsForCities(MARKETING_INTERN_CITIES);
+const MARKETING_INTERN_ZIP_CODES = careerZipCodesForLocations(MARKETING_INTERN_LOCATIONS);
+// Placeholder external job posting URLs for Marketing Intern applications.
+// Replace these with the live Indeed and LinkedIn posting URLs when available.
+const MARKETING_INTERN_INDEED_APPLY_URL = "https://www.indeed.com/jobs";
+const MARKETING_INTERN_LINKEDIN_APPLY_URL = "https://www.linkedin.com/jobs/";
 
 window.SNOWS_CAREER_SERVICE_AREAS = SNOWS_CAREER_SERVICE_AREAS;
 window.SNOWS_CAREER_NEARBY_LOCATIONS = SNOWS_CAREER_NEARBY_LOCATIONS;
@@ -67,7 +74,7 @@ window.SNOWS_CAREERS_JOBS = [
   {
     slug: "floor-cleaner-intern",
     title: "Floor Cleaner Intern",
-    company: "Snow's Floor Service",
+    company: "Snows Floor Service",
     department: "Operations",
     location: "Hattiesburg, MS",
     cities: CORE_FIELD_CITIES,
@@ -76,7 +83,7 @@ window.SNOWS_CAREERS_JOBS = [
     employmentType: "Internship",
     payType: "Paid internship",
     shortDescription: "Learn the basics of professional commercial floor care while supporting experienced technicians on active job sites.",
-    description: "This role is built for someone who wants hands-on exposure to commercial floor care. Interns help with setup, cleanup, equipment movement, and basic service tasks while learning the standards Snow's Floor Service uses on customer job sites.",
+    description: "This role is built for someone who wants hands-on exposure to commercial floor care. Interns help with setup, cleanup, equipment movement, and basic service tasks while learning the standards Snows Floor Service uses on customer job sites.",
     responsibilities: [
       "Assist with setup, cleanup, and safe movement of equipment.",
       "Support floor preparation and detail work under supervision.",
@@ -94,7 +101,7 @@ window.SNOWS_CAREERS_JOBS = [
   {
     slug: "floor-cleaner-trainee",
     title: "Floor Cleaner Trainee",
-    company: "Snow's Floor Service",
+    company: "Snows Floor Service",
     department: "Operations",
     location: "Hattiesburg, MS",
     cities: CORE_FIELD_CITIES,
@@ -103,7 +110,7 @@ window.SNOWS_CAREERS_JOBS = [
     employmentType: "Full-time",
     payType: "Hourly",
     shortDescription: "Build hands-on skills in commercial floor cleaning, maintenance, and job-site service standards.",
-    description: "Floor Cleaner Trainees learn Snow's Floor Service procedures while working alongside experienced technicians. This role is for dependable candidates who want to grow into professional commercial floor cleaning and maintenance work.",
+    description: "Floor Cleaner Trainees learn Snows Floor Service procedures while working alongside experienced technicians. This role is for dependable candidates who want to grow into professional commercial floor cleaning and maintenance work.",
     responsibilities: [
       "Prepare work areas, equipment, and floor care supplies.",
       "Learn cleaning, scrubbing, buffing, and maintenance procedures.",
@@ -123,7 +130,7 @@ window.SNOWS_CAREERS_JOBS = [
   {
     slug: "floor-cleaner",
     title: "Floor Cleaner",
-    company: "Snow's Floor Service",
+    company: "Snows Floor Service",
     department: "Operations",
     location: "Hattiesburg, MS",
     cities: CORE_FIELD_CITIES,
@@ -152,7 +159,7 @@ window.SNOWS_CAREERS_JOBS = [
   {
     slug: "team-lead-trainee",
     title: "Team Lead Trainee",
-    company: "Snow's Floor Service",
+    company: "Snows Floor Service",
     department: "Operations Leadership",
     location: "Hattiesburg, MS",
     cities: CORE_FIELD_CITIES,
@@ -161,7 +168,7 @@ window.SNOWS_CAREERS_JOBS = [
     employmentType: "Full-time",
     payType: "Hourly",
     shortDescription: "Train toward crew leadership while learning project planning, quality checks, and client-ready communication.",
-    description: "Team Lead Trainees learn how Snow's Floor Service plans, runs, and checks commercial floor care jobs. This position is designed for someone who already has solid work habits and wants to grow into crew leadership.",
+    description: "Team Lead Trainees learn how Snows Floor Service plans, runs, and checks commercial floor care jobs. This position is designed for someone who already has solid work habits and wants to grow into crew leadership.",
     responsibilities: [
       "Assist team leads with job setup, task assignments, and closeout.",
       "Learn quality standards for finished commercial floors.",
@@ -179,7 +186,7 @@ window.SNOWS_CAREERS_JOBS = [
   {
     slug: "team-lead",
     title: "Floor Team Lead",
-    company: "Snow's Floor Service",
+    company: "Snows Floor Service",
     department: "Operations Leadership",
     location: "Hattiesburg, MS",
     cities: [...CORE_FIELD_CITIES, ...JACKSON_ROUTE_CITIES],
@@ -191,7 +198,7 @@ window.SNOWS_CAREERS_JOBS = [
     description: "The Floor Team Lead guides commercial floor care crews through active jobs, checks finished work, and helps keep each project organized from setup through closeout. This role is for someone who can lead by example and communicate clearly with both team members and customers.",
     responsibilities: [
       "Coordinate crew tasks and job-site workflow.",
-      "Inspect completed work against Snow's Floor Service standards.",
+      "Inspect completed work against Snows Floor Service standards.",
       "Communicate job progress, supply needs, and client notes.",
       "Support safe equipment use and professional conduct on customer sites."
     ],
@@ -208,7 +215,7 @@ window.SNOWS_CAREERS_JOBS = [
   {
     slug: "marketing-representative",
     title: "Marketing Representative",
-    company: "Snow's Floor Service",
+    company: "Snows Floor Service",
     department: "Marketing",
     location: REMOTE_LOCATION,
     cities: MISSISSIPPI_HIRING_CITIES,
@@ -218,8 +225,8 @@ window.SNOWS_CAREERS_JOBS = [
     nationwideRemote: false,
     employmentType: "Part-time",
     payType: "Hourly plus performance opportunities",
-    shortDescription: "Represent Snow's Floor Service in the community and help introduce our commercial floor care services to local organizations.",
-    description: "The Marketing Representative supports local outreach for Snow's Floor Service. This role helps introduce commercial floor care services to businesses, churches, schools, retail spaces, and facilities while keeping outreach professional and organized.",
+    shortDescription: "Represent Snows Floor Service in the community and help introduce our commercial floor care services to local organizations.",
+    description: "The Marketing Representative supports local outreach for Snows Floor Service. This role helps introduce commercial floor care services to businesses, churches, schools, retail spaces, and facilities while keeping outreach professional and organized.",
     responsibilities: [
       "Support local outreach to businesses, schools, churches, and retail spaces.",
       "Share service information professionally and accurately.",
@@ -237,9 +244,120 @@ window.SNOWS_CAREERS_JOBS = [
     currentlyHiring: false
   },
   {
+    slug: "marketing-intern",
+    title: "Marketing Intern",
+    company: "Snows Floor Service",
+    department: "Marketing",
+    location: "Florence, MS",
+    cities: MARKETING_INTERN_CITIES,
+    locations: MARKETING_INTERN_LOCATIONS,
+    zipCodes: MARKETING_INTERN_ZIP_CODES,
+    employmentType: "Commission-Based / Flexible Schedule",
+    payType: "Commission-Based",
+    shortDescription: "Help grow Snows Floor Service through local business outreach, networking, and lead generation opportunities.",
+    description: "Snow’s Floor Service is seeking motivated and outgoing Marketing Interns to help expand our commercial floor care business through community outreach, networking, and lead generation.",
+    detailSections: [
+      {
+        heading: "Job Overview",
+        paragraphs: [
+          "Snow’s Floor Service is seeking motivated and outgoing Marketing Interns to help expand our commercial floor care business through community outreach, networking, and lead generation. This role focuses on introducing local businesses to our services, generating walkthrough opportunities, and helping build long-term commercial relationships.",
+          "This is a commission-based position designed for self-motivated individuals interested in business, marketing, entrepreneurship, or sales experience. Marketing Interns will represent Snow’s Floor Service professionally while helping connect businesses with commercial floor maintenance solutions.",
+          "The ideal candidate is confident, organized, and comfortable interacting with business owners, office managers, schools, churches, and commercial facilities. This role offers flexible scheduling and real-world business development experience within a growing company."
+        ]
+      },
+      {
+        heading: "Key Responsibilities",
+        items: [
+          "Visit local businesses and commercial properties to introduce Snow’s Floor Service",
+          "Generate walkthrough and quote opportunities for commercial floor care services",
+          "Distribute business cards, flyers, and promotional materials",
+          "Build relationships with schools, offices, churches, retail stores, and commercial facilities",
+          "Collect business contact information and document outreach efforts",
+          "Assist with local marketing and community networking initiatives",
+          "Maintain professional communication and presentation standards",
+          "Track leads and referral activity accurately",
+          "Report qualified leads and outreach activity back to management",
+          "Help increase local brand awareness throughout target service areas"
+        ]
+      },
+      {
+        heading: "Qualifications",
+        items: [
+          "Strong communication and interpersonal skills",
+          "Comfortable with face-to-face interaction and networking",
+          "Self-motivated and goal-oriented",
+          "Reliable transportation preferred",
+          "Ability to work independently and manage flexible schedules",
+          "Interest in marketing, business development, entrepreneurship, or sales preferred",
+          "Professional appearance and attitude",
+          "No prior experience required — training provided"
+        ]
+      },
+      {
+        heading: "Compensation",
+        items: [
+          "Commission-based position",
+          "Performance-based earning opportunities",
+          "Flexible earning potential based on qualified accounts and business growth",
+          "Earnings tied to generated business and account activity"
+        ]
+      },
+      {
+        heading: "Why Join Snow’s Floor Service?",
+        items: [
+          "Flexible schedule with independent work opportunities",
+          "Real-world marketing and business development experience",
+          "Performance-based earning potential",
+          "Opportunities for long-term growth within the company",
+          "Hands-on experience working with commercial clients and businesses",
+          "Supportive team environment within a growing company",
+          "Valuable networking and relationship-building experience",
+          "Potential advancement into leadership or management roles as the company grows"
+        ]
+      },
+      {
+        heading: "Work Location",
+        items: [
+          "On the road",
+          "Local travel throughout Florence, Byram, Pearl, Brandon, Hattiesburg, and surrounding Mississippi areas"
+        ]
+      }
+    ],
+    closingText: "Join Snow’s Floor Service and help grow a professional commercial floor care company focused on quality service, long-term client relationships, and operational excellence.",
+    applicationLinks: [
+      { platform: "indeed", label: "Apply on Indeed", url: MARKETING_INTERN_INDEED_APPLY_URL },
+      { platform: "linkedin", label: "Apply on LinkedIn", url: MARKETING_INTERN_LINKEDIN_APPLY_URL }
+    ],
+    responsibilities: [
+      "Visit local businesses and commercial properties to introduce Snow’s Floor Service",
+      "Generate walkthrough and quote opportunities for commercial floor care services",
+      "Distribute business cards, flyers, and promotional materials",
+      "Build relationships with schools, offices, churches, retail stores, and commercial facilities",
+      "Collect business contact information and document outreach efforts",
+      "Assist with local marketing and community networking initiatives",
+      "Maintain professional communication and presentation standards",
+      "Track leads and referral activity accurately",
+      "Report qualified leads and outreach activity back to management",
+      "Help increase local brand awareness throughout target service areas"
+    ],
+    requirements: [
+      "Strong communication and interpersonal skills",
+      "Comfortable with face-to-face interaction and networking",
+      "Self-motivated and goal-oriented",
+      "Reliable transportation preferred",
+      "Ability to work independently and manage flexible schedules",
+      "Interest in marketing, business development, entrepreneurship, or sales preferred",
+      "Professional appearance and attitude",
+      "No prior experience required — training provided"
+    ],
+    schedule: "Flexible schedule with independent work opportunities.",
+    transportationRequirements: "On the road. Local travel throughout Florence, Byram, Pearl, Brandon, Hattiesburg, and surrounding Mississippi areas.",
+    currentlyHiring: true
+  },
+  {
     slug: "sales-associate",
     title: "Sales Associate",
-    company: "Snow's Floor Service",
+    company: "Snows Floor Service",
     department: "Sales",
     location: REMOTE_LOCATION,
     cities: MISSISSIPPI_HIRING_CITIES,
@@ -250,12 +368,12 @@ window.SNOWS_CAREERS_JOBS = [
     employmentType: "Full-time",
     payType: "Base plus commission opportunities",
     shortDescription: "Help commercial clients understand floor care options, schedule walkthroughs, and move from inquiry to service plan.",
-    description: "The Sales Associate helps commercial prospects understand Snow's Floor Service offerings and move from first conversation to quote, walkthrough, or maintenance plan. This role depends on clear follow-up, organized notes, and professional communication.",
+    description: "The Sales Associate helps commercial prospects understand Snows Floor Service offerings and move from first conversation to quote, walkthrough, or maintenance plan. This role depends on clear follow-up, organized notes, and professional communication.",
     responsibilities: [
       "Follow up with qualified leads and prospective commercial clients.",
       "Coordinate walkthroughs and service conversations.",
       "Maintain clear notes on client needs, timing, and next steps.",
-      "Represent Snow's Floor Service with professionalism and accuracy."
+      "Represent Snows Floor Service with professionalism and accuracy."
     ],
     requirements: [
       "Sales or customer-facing experience preferred.",
@@ -270,7 +388,7 @@ window.SNOWS_CAREERS_JOBS = [
   {
     slug: "sales-intern",
     title: "Sales Intern",
-    company: "Snow's Floor Service",
+    company: "Snows Floor Service",
     department: "Sales",
     location: REMOTE_LOCATION,
     cities: MISSISSIPPI_HIRING_CITIES,
@@ -285,7 +403,7 @@ window.SNOWS_CAREERS_JOBS = [
     responsibilities: [
       "Research potential commercial clients and service opportunities.",
       "Assist with outreach lists, notes, and scheduling support.",
-      "Learn Snow's Floor Service offerings and customer standards."
+      "Learn Snows Floor Service offerings and customer standards."
     ],
     requirements: [
       "Interest in sales, marketing, or local business development.",

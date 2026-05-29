@@ -1,10 +1,31 @@
 (function () {
   const smallNavQuery = window.matchMedia("(max-width: 900px)");
   const scheduleUrl = window.location.protocol === "file:" ? "schedule.html" : "/schedule";
+  const cleanRoutes = window.location.protocol !== "file:";
 
   document.querySelectorAll('a[href="/schedule"], a[href="/schedule/"]').forEach((link) => {
     link.setAttribute("href", scheduleUrl);
   });
+
+  function upgradeLinksWhenAvailable(route, selector, createHref) {
+    if (!cleanRoutes || typeof fetch !== "function") return;
+    fetch(route, { method: "HEAD", cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) return;
+        document.querySelectorAll(selector).forEach((link) => {
+          link.setAttribute("href", createHref(link));
+        });
+      })
+      .catch(() => {});
+  }
+
+  if (cleanRoutes) {
+    upgradeLinksWhenAvailable("/careers", 'a[href="careers.html"]', () => "/careers");
+    upgradeLinksWhenAvailable("/careers/jobs", 'a[href="careers-jobs.html"], a[href="careers-jobs.html#openings"]', (link) => {
+      const hash = link.getAttribute("href").includes("#") ? "#openings" : "";
+      return `/careers/jobs${hash}`;
+    });
+  }
 
   document.querySelectorAll("[data-nav]").forEach((nav) => {
     const toggle = nav.querySelector("[data-nav-toggle]");

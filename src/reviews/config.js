@@ -3,6 +3,7 @@ const path = require("path");
 
 const DEFAULT_CONFIG = {
   minimumRating: 4,
+  source: "google",
   featuredReviewsOnly: false,
   requireManualApproval: false,
   hiddenReviewIds: [],
@@ -10,7 +11,7 @@ const DEFAULT_CONFIG = {
   pinnedReviewIds: [],
   maxReviews: 6,
   cacheSeconds: 300,
-  verifiedBadgeLabel: "Verified customer"
+  verifiedBadgeLabel: "Google review"
 };
 
 function listFromEnv(value) {
@@ -26,6 +27,10 @@ function booleanFromEnv(value, fallback) {
 function numberFromEnv(value, fallback) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function envValue(name, fallback) {
+  return process.env[name] === undefined || process.env[name] === "" ? fallback : process.env[name];
 }
 
 async function readJsonIfExists(filePath) {
@@ -46,6 +51,7 @@ async function loadReviewConfig(cwd = process.cwd()) {
   const merged = { ...DEFAULT_CONFIG, ...fileConfig };
 
   merged.minimumRating = numberFromEnv(process.env.REVIEWS_MINIMUM_RATING, merged.minimumRating);
+  merged.source = envValue("REVIEWS_SOURCE", merged.source);
   merged.featuredReviewsOnly = booleanFromEnv(process.env.REVIEWS_FEATURED_ONLY, merged.featuredReviewsOnly);
   merged.requireManualApproval = booleanFromEnv(process.env.REVIEWS_REQUIRE_MANUAL_APPROVAL, merged.requireManualApproval);
   merged.maxReviews = numberFromEnv(process.env.REVIEWS_MAX, merged.maxReviews);
@@ -68,6 +74,7 @@ async function loadReviewConfig(cwd = process.cwd()) {
 function publicReviewConfig(config) {
   return {
     minimumRating: config.minimumRating,
+    source: config.source,
     featuredReviewsOnly: config.featuredReviewsOnly,
     requireManualApproval: config.requireManualApproval,
     maxReviews: config.maxReviews,

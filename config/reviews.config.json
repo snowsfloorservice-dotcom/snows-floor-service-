@@ -1,14 +1,12 @@
 {
   "minimumRating": 4,
+  "source": "google",
   "featuredReviewsOnly": false,
   "requireManualApproval": false,
   "hiddenReviewIds": [],
   "approvedReviewIds": [],
-  "pinnedReviewIds": [
-    "featured-downtown-office",
-    "featured-medical-office"
-  ],
+  "pinnedReviewIds": [],
   "maxReviews": 6,
   "cacheSeconds": 300,
-  "verifiedBadgeLabel": "Verified customer"
+  "verifiedBadgeLabel": "Google review"
 }
