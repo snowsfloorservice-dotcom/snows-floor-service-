@@ -59,13 +59,13 @@ const CORE_FIELD_ZIP_CODES = careerZipCodesForLocations(CORE_FIELD_LOCATIONS);
 const JACKSON_ROUTE_CITIES = ["Florence", "Byram", "Pearl", "Brandon", "Clinton"];
 const JACKSON_ROUTE_LOCATIONS = careerLabelsForCities(JACKSON_ROUTE_CITIES);
 const JACKSON_ROUTE_ZIP_CODES = careerZipCodesForLocations(JACKSON_ROUTE_LOCATIONS);
-const MARKETING_INTERN_CITIES = ["Florence", "Byram", "Pearl", "Brandon", "Hattiesburg"];
-const MARKETING_INTERN_LOCATIONS = careerLabelsForCities(MARKETING_INTERN_CITIES);
-const MARKETING_INTERN_ZIP_CODES = careerZipCodesForLocations(MARKETING_INTERN_LOCATIONS);
-// Placeholder external job posting URLs for Marketing Intern applications.
-// Replace these with the live Indeed and LinkedIn posting URLs when available.
-const MARKETING_INTERN_INDEED_APPLY_URL = "https://www.indeed.com/jobs";
-const MARKETING_INTERN_LINKEDIN_APPLY_URL = "https://www.linkedin.com/jobs/";
+const MARKETING_REPRESENTATIVE_CITIES = ["Florence", "Byram", "Pearl", "Brandon", "Hattiesburg"];
+const MARKETING_REPRESENTATIVE_LOCATIONS = careerLabelsForCities(MARKETING_REPRESENTATIVE_CITIES);
+const MARKETING_REPRESENTATIVE_ZIP_CODES = careerZipCodesForLocations(MARKETING_REPRESENTATIVE_LOCATIONS);
+// External job posting URLs for Marketing Representative applications.
+// Replace the LinkedIn placeholder with the live posting URL when available.
+const MARKETING_REPRESENTATIVE_INDEED_APPLY_URL = "https://www.indeed.com/job/marketing-representative-689b3336578ae59a";
+const MARKETING_REPRESENTATIVE_LINKEDIN_APPLY_URL = "https://www.linkedin.com/jobs/";
 
 window.SNOWS_CAREER_SERVICE_AREAS = SNOWS_CAREER_SERVICE_AREAS;
 window.SNOWS_CAREER_NEARBY_LOCATIONS = SNOWS_CAREER_NEARBY_LOCATIONS;
@@ -217,51 +217,20 @@ window.SNOWS_CAREERS_JOBS = [
     title: "Marketing Representative",
     company: "Snows Floor Service",
     department: "Marketing",
-    location: REMOTE_LOCATION,
-    cities: MISSISSIPPI_HIRING_CITIES,
-    locations: REMOTE_HIRING_LOCATIONS,
-    zipCodes: MISSISSIPPI_HIRING_ZIP_CODES,
-    remote: true,
-    nationwideRemote: false,
-    employmentType: "Part-time",
-    payType: "Hourly plus performance opportunities",
-    shortDescription: "Represent Snows Floor Service in the community and help introduce our commercial floor care services to local organizations.",
-    description: "The Marketing Representative supports local outreach for Snows Floor Service. This role helps introduce commercial floor care services to businesses, churches, schools, retail spaces, and facilities while keeping outreach professional and organized.",
-    responsibilities: [
-      "Support local outreach to businesses, schools, churches, and retail spaces.",
-      "Share service information professionally and accurately.",
-      "Track outreach activity and pass qualified opportunities to the sales team.",
-      "Help maintain a positive, trustworthy brand presence in the community."
-    ],
-    requirements: [
-      "Friendly, professional communication style.",
-      "Comfortable with local field outreach and follow-up.",
-      "Organized, dependable, and brand-conscious.",
-      "Able to track notes and follow simple outreach processes."
-    ],
-    schedule: "Part-time schedule with flexible outreach blocks. Some daytime availability is helpful for contacting businesses.",
-    transportationRequirements: "Reliable transportation may be needed for local outreach, business visits, or community events.",
-    currentlyHiring: false
-  },
-  {
-    slug: "marketing-intern",
-    title: "Marketing Intern",
-    company: "Snows Floor Service",
-    department: "Marketing",
     location: "Florence, MS",
-    cities: MARKETING_INTERN_CITIES,
-    locations: MARKETING_INTERN_LOCATIONS,
-    zipCodes: MARKETING_INTERN_ZIP_CODES,
+    cities: MARKETING_REPRESENTATIVE_CITIES,
+    locations: MARKETING_REPRESENTATIVE_LOCATIONS,
+    zipCodes: MARKETING_REPRESENTATIVE_ZIP_CODES,
     employmentType: "Commission-Based / Flexible Schedule",
     payType: "Commission-Based",
     shortDescription: "Help grow Snows Floor Service through local business outreach, networking, and lead generation opportunities.",
-    description: "Snow’s Floor Service is seeking motivated and outgoing Marketing Interns to help expand our commercial floor care business through community outreach, networking, and lead generation.",
+    description: "Snow’s Floor Service is seeking motivated and outgoing Marketing Representatives to help expand our commercial floor care business through community outreach, networking, and lead generation.",
     detailSections: [
       {
         heading: "Job Overview",
         paragraphs: [
-          "Snow’s Floor Service is seeking motivated and outgoing Marketing Interns to help expand our commercial floor care business through community outreach, networking, and lead generation. This role focuses on introducing local businesses to our services, generating walkthrough opportunities, and helping build long-term commercial relationships.",
-          "This is a commission-based position designed for self-motivated individuals interested in business, marketing, entrepreneurship, or sales experience. Marketing Interns will represent Snow’s Floor Service professionally while helping connect businesses with commercial floor maintenance solutions.",
+          "Snow’s Floor Service is seeking motivated and outgoing Marketing Representatives to help expand our commercial floor care business through community outreach, networking, and lead generation. This role focuses on introducing local businesses to our services, generating walkthrough opportunities, and helping build long-term commercial relationships.",
+          "This is a commission-based position designed for self-motivated individuals interested in business, marketing, entrepreneurship, or sales experience. Marketing Representatives will represent Snow’s Floor Service professionally while helping connect businesses with commercial floor maintenance solutions.",
           "The ideal candidate is confident, organized, and comfortable interacting with business owners, office managers, schools, churches, and commercial facilities. This role offers flexible scheduling and real-world business development experience within a growing company."
         ]
       },
@@ -325,8 +294,8 @@ window.SNOWS_CAREERS_JOBS = [
     ],
     closingText: "Join Snow’s Floor Service and help grow a professional commercial floor care company focused on quality service, long-term client relationships, and operational excellence.",
     applicationLinks: [
-      { platform: "indeed", label: "Apply on Indeed", url: MARKETING_INTERN_INDEED_APPLY_URL },
-      { platform: "linkedin", label: "Apply on LinkedIn", url: MARKETING_INTERN_LINKEDIN_APPLY_URL }
+      { platform: "indeed", label: "Apply on Indeed", url: MARKETING_REPRESENTATIVE_INDEED_APPLY_URL },
+      { platform: "linkedin", label: "Apply on LinkedIn", url: MARKETING_REPRESENTATIVE_LINKEDIN_APPLY_URL }
     ],
     responsibilities: [
       "Visit local businesses and commercial properties to introduce Snow’s Floor Service",

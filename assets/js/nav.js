@@ -2,10 +2,40 @@
   const smallNavQuery = window.matchMedia("(max-width: 900px)");
   const scheduleUrl = window.location.protocol === "file:" ? "schedule.html" : "/schedule";
   const cleanRoutes = window.location.protocol !== "file:";
+  const jobberRequestFormUrl = "https://clienthub.getjobber.com/client_hubs/9630024d-ac05-424c-8a3f-59918f467004/public/work_request/embedded_work_request_form?form_id=4794630";
 
-  document.querySelectorAll('a[href="/schedule"], a[href="/schedule/"]').forEach((link) => {
-    link.setAttribute("href", scheduleUrl);
+  document.querySelectorAll('a[href^="/schedule"]').forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    const hashIndex = href.indexOf("#");
+    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
+    link.setAttribute("href", `${scheduleUrl}${hash}`);
   });
+
+  function addHeadHint(rel, href, as) {
+    if (document.head.querySelector(`link[rel="${rel}"][href="${href}"]`)) return;
+    const link = document.createElement("link");
+    link.rel = rel;
+    link.href = href;
+    if (as) link.as = as;
+    document.head.appendChild(link);
+  }
+
+  function warmScheduleForm() {
+    if (!document.querySelector('a[href*="schedule"]')) return;
+    addHeadHint("preconnect", "https://clienthub.getjobber.com");
+    addHeadHint("preconnect", "https://d3ey4dbjkt2f6s.cloudfront.net");
+    addHeadHint("prefetch", jobberRequestFormUrl, "document");
+  }
+
+  function queueScheduleFormWarmup() {
+    window.setTimeout(warmScheduleForm, 800);
+  }
+
+  if (document.readyState === "complete") {
+    queueScheduleFormWarmup();
+  } else {
+    window.addEventListener("load", queueScheduleFormWarmup, { once: true });
+  }
 
   function upgradeLinksWhenAvailable(route, selector, createHref) {
     if (!cleanRoutes || typeof fetch !== "function") return;
