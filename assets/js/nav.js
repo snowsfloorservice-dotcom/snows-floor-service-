@@ -3,7 +3,6 @@
   const scheduleUrl = window.location.protocol === "file:" ? "schedule.html" : "/schedule";
   const cleanRoutes = window.location.protocol !== "file:";
   const homeUrl = cleanRoutes ? window.location.origin : "index.html";
-  const jobberRequestFormUrl = "https://clienthub.getjobber.com/client_hubs/9630024d-ac05-424c-8a3f-59918f467004/public/work_request/embedded_work_request_form?form_id=4794630";
   const homeScrollTargetKey = "snowsHomeScrollTarget";
   const homeScrollTargets = new Set(["top", "gallery", "reviews", "contact"]);
 
@@ -146,7 +145,6 @@
     if (!document.querySelector('a[href*="schedule"]')) return;
     addHeadHint("preconnect", "https://clienthub.getjobber.com");
     addHeadHint("preconnect", "https://d3ey4dbjkt2f6s.cloudfront.net");
-    addHeadHint("prefetch", jobberRequestFormUrl, "document");
   }
 
   function queueScheduleFormWarmup() {
