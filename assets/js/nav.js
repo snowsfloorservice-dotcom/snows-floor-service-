@@ -12,6 +12,17 @@
     return path === "" || path === "/" || path.endsWith("/index.html");
   }
 
+  function isSchedulePage() {
+    const path = window.location.pathname.replace(/\/+$/, "").toLowerCase();
+    return path.endsWith("/schedule") || path.endsWith("/schedule.html");
+  }
+
+  function cleanScheduleHash() {
+    if (!isSchedulePage() || !window.location.hash || typeof window.history.replaceState !== "function") return;
+    const cleanUrl = window.location.protocol === "file:" ? window.location.href.split("#")[0] : `${window.location.origin}/schedule${window.location.search}`;
+    window.history.replaceState(window.history.state, document.title, cleanUrl);
+  }
+
   function cleanCurrentHash() {
     const isIndexHome = cleanRoutes && isHomePage() && window.location.pathname.toLowerCase().endsWith("/index.html");
     if ((!window.location.hash && !isIndexHome) || typeof window.history.replaceState !== "function") return;
@@ -72,10 +83,11 @@
   }
 
   document.querySelectorAll('a[href^="/schedule"]').forEach((link) => {
-    const href = link.getAttribute("href") || "";
-    const hashIndex = href.indexOf("#");
-    const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
-    link.setAttribute("href", `${scheduleUrl}${hash}`);
+    link.setAttribute("href", scheduleUrl);
+  });
+
+  document.querySelectorAll('a[href^="schedule.html"]').forEach((link) => {
+    link.setAttribute("href", "schedule.html");
   });
 
   document.querySelectorAll("[data-scroll-target]").forEach((link) => {
@@ -115,6 +127,11 @@
       window.requestAnimationFrame(() => scrollToHomeTarget(target, true));
     }
   }
+
+  cleanScheduleHash();
+  window.setTimeout(cleanScheduleHash, 0);
+  window.addEventListener("hashchange", cleanScheduleHash);
+  window.addEventListener("load", cleanScheduleHash, { once: true });
 
   function addHeadHint(rel, href, as) {
     if (document.head.querySelector(`link[rel="${rel}"][href="${href}"]`)) return;

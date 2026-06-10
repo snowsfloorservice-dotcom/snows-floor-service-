@@ -90,7 +90,7 @@
   }
 
   function scheduleUrl() {
-    return window.location.protocol === "file:" ? "schedule.html#request-form" : "/schedule#request-form";
+    return window.location.protocol === "file:" ? "schedule.html" : "/schedule";
   }
 
   window.openJobber = function openJobber() {
